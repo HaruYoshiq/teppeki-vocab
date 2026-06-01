@@ -5,8 +5,9 @@ import { useProgress } from "@/hooks/useProgress";
 import Flashcard from "./Flashcard";
 import WordList from "./WordList";
 import GrammarApp from "./GrammarApp";
+import VocabQuiz from "./VocabQuiz";
 
-type Tab = "study" | "list" | "grammar";
+type Tab = "study" | "list" | "quiz" | "grammar";
 
 export default function VocabApp() {
   const [tab, setTab] = useState<Tab>("study");
@@ -24,6 +25,7 @@ export default function VocabApp() {
   const tabs: { key: Tab; label: string }[] = [
     { key: "study",   label: "学習" },
     { key: "list",    label: "一覧" },
+    { key: "quiz",    label: "単語Quiz" },
     { key: "grammar", label: "文法" },
   ];
 
@@ -43,6 +45,8 @@ export default function VocabApp() {
                 tab === key
                   ? key === "grammar"
                     ? "bg-emerald-500 text-white"
+                    : key === "quiz"
+                    ? "bg-violet-500 text-white"
                     : "bg-indigo-500 text-white"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
@@ -55,7 +59,7 @@ export default function VocabApp() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar (desktop) — only for vocab tabs */}
-        {tab !== "grammar" && (
+        {tab !== "grammar" && tab !== "quiz" && (
           <aside className="hidden md:flex flex-col w-52 border-r border-zinc-800 p-3 gap-3 overflow-y-auto">
             <div className="text-xs uppercase tracking-widest text-zinc-500 px-1">語根グループ</div>
             <div className="flex flex-col gap-1">
@@ -100,6 +104,9 @@ export default function VocabApp() {
           {tab === "list" && (
             <WordList group={currentGroup} isLearned={isLearned} />
           )}
+          {tab === "quiz" && (
+            <VocabQuiz isLearned={isLearned} />
+          )}
           {tab === "grammar" && (
             <GrammarApp />
           )}
@@ -107,7 +114,7 @@ export default function VocabApp() {
       </div>
 
       {/* Bottom nav (mobile) — only for vocab tabs */}
-      {tab !== "grammar" && (
+      {tab !== "grammar" && tab !== "quiz" && (
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 pb-safe">
           <div className="flex overflow-x-auto gap-2 px-3 py-2 scrollbar-none">
             {groups.map(g => (
