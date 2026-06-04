@@ -7,8 +7,9 @@ import WordList from "./WordList";
 import GrammarApp from "./GrammarApp";
 import VocabQuiz from "./VocabQuiz";
 import DailyWords from "./DailyWords";
+import SpeakingApp from "./SpeakingApp";
 
-type Tab = "daily" | "study" | "list" | "quiz" | "grammar";
+type Tab = "daily" | "study" | "list" | "quiz" | "grammar" | "speaking";
 
 export default function VocabApp() {
   const [tab, setTab] = useState<Tab>("daily");
@@ -24,11 +25,12 @@ export default function VocabApp() {
   if (!ready) return null;
 
   const tabs: { key: Tab; label: string }[] = [
-    { key: "daily",   label: "今日の単語" },
-    { key: "study",   label: "語根学習" },
-    { key: "list",    label: "一覧" },
-    { key: "quiz",    label: "単語Quiz" },
-    { key: "grammar", label: "文法" },
+    { key: "daily",    label: "今日の単語" },
+    { key: "speaking", label: "英会話" },
+    { key: "study",    label: "語根学習" },
+    { key: "list",     label: "一覧" },
+    { key: "quiz",     label: "単語Quiz" },
+    { key: "grammar",  label: "文法" },
   ];
 
   return (
@@ -51,6 +53,8 @@ export default function VocabApp() {
                     ? "bg-violet-500 text-white"
                     : key === "daily"
                     ? "bg-amber-500 text-white"
+                    : key === "speaking"
+                    ? "bg-sky-500 text-white"
                     : "bg-indigo-500 text-white"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
@@ -63,7 +67,7 @@ export default function VocabApp() {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar (desktop) — only for vocab tabs */}
-        {tab !== "grammar" && tab !== "quiz" && tab !== "daily" && (
+        {tab !== "grammar" && tab !== "quiz" && tab !== "daily" && tab !== "speaking" && (
           <aside className="hidden md:flex flex-col w-52 border-r border-zinc-800 p-3 gap-3 overflow-y-auto">
             <div className="text-xs uppercase tracking-widest text-zinc-500 px-1">語根グループ</div>
             <div className="flex flex-col gap-1">
@@ -105,6 +109,9 @@ export default function VocabApp() {
           {tab === "daily" && (
             <DailyWords />
           )}
+          {tab === "speaking" && (
+            <SpeakingApp />
+          )}
           {tab === "study" && (
             <Flashcard group={currentGroup} isLearned={isLearned} mark={mark} reset={reset} />
           )}
@@ -121,7 +128,7 @@ export default function VocabApp() {
       </div>
 
       {/* Bottom nav (mobile) — only for vocab tabs */}
-      {tab !== "grammar" && tab !== "quiz" && tab !== "daily" && (
+      {tab !== "grammar" && tab !== "quiz" && tab !== "daily" && tab !== "speaking" && (
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 pb-safe">
           <div className="flex overflow-x-auto gap-2 px-3 py-2 scrollbar-none">
             {groups.map(g => (
