@@ -1,6 +1,7 @@
 export type ThaiWord = {
   thai: string;      // タイ文字
   phonetic: string;  // ローマ字表記
+  ipa?: string;      // IPA（国際音声記号）
   meaning: string;   // 日本語意味
   example: string;   // タイ語例文
   exampleJa: string; // 日本語訳
