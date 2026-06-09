@@ -24,28 +24,28 @@ export default function VocabApp() {
 
   if (!ready) return null;
 
-  const tabs: { key: Tab; label: string }[] = [
-    { key: "daily",    label: "今日の単語" },
-    { key: "speaking", label: "英会話" },
-    { key: "study",    label: "語根学習" },
-    { key: "list",     label: "一覧" },
-    { key: "quiz",     label: "単語Quiz" },
-    { key: "grammar",  label: "文法" },
+  const tabs: { key: Tab; label: string; short: string }[] = [
+    { key: "daily",    label: "今日の単語", short: "今日" },
+    { key: "speaking", label: "英会話", short: "会話" },
+    { key: "study",    label: "語根学習", short: "学習" },
+    { key: "list",     label: "一覧", short: "一覧" },
+    { key: "quiz",     label: "単語Quiz", short: "Quiz" },
+    { key: "grammar",  label: "文法", short: "文法" },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-zinc-950 text-zinc-100">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-zinc-900 border-b border-zinc-800 px-4 h-14 flex items-center justify-between">
-        <div className="text-lg font-bold">
-          <span className="text-indigo-400">Haru</span> 英単語
+      <header className="sticky top-0 z-50 bg-zinc-900 border-b border-zinc-800 px-2 sm:px-4 h-auto sm:h-14 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 py-2 sm:py-0">
+        <div className="text-base sm:text-lg font-bold flex-shrink-0">
+          <span className="text-indigo-400">Haru</span> <span className="hidden sm:inline">英単語</span>
         </div>
-        <div className="flex gap-1 bg-zinc-800 p-1 rounded-xl">
-          {tabs.map(({ key, label }) => (
+        <div className="flex gap-1 bg-zinc-800 p-1 rounded-xl overflow-x-auto flex-1 sm:flex-none">
+          {tabs.map(({ key, label, short }) => (
             <button
               key={key}
               onClick={() => setTab(key)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+              className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors flex-shrink-0 whitespace-nowrap ${
                 tab === key
                   ? key === "grammar"
                     ? "bg-emerald-500 text-white"
@@ -59,7 +59,8 @@ export default function VocabApp() {
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
-              {label}
+              <span className="hidden sm:inline">{label}</span>
+              <span className="inline sm:hidden">{short}</span>
             </button>
           ))}
         </div>
