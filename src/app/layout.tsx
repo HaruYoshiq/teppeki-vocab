@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "鉄壁英単語",
+  title: "Haru - 英単語学習アプリ",
   description: "語根グループ別英単語学習アプリ",
 };
 

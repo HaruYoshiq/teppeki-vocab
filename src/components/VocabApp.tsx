@@ -38,7 +38,7 @@ export default function VocabApp() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-zinc-900 border-b border-zinc-800 px-4 h-14 flex items-center justify-between">
         <div className="text-lg font-bold">
-          鉄<span className="text-indigo-400">壁</span>英単語
+          <span className="text-indigo-400">Haru</span> 英単語
         </div>
         <div className="flex gap-1 bg-zinc-800 p-1 rounded-xl">
           {tabs.map(({ key, label }) => (
