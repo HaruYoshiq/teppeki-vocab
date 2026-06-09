@@ -1,5 +1,5 @@
-import VocabApp from "@/components/VocabApp";
+import LanguageApp from "@/components/LanguageApp";
 
 export default function Home() {
-  return <VocabApp />;
+  return <LanguageApp />;
 }
